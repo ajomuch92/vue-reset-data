@@ -32,7 +32,7 @@ export default {
 
 ### How to use it
 
-1. Call this function to init the mixin at any point of the lifecycle of your component (Preferably on created or mounted):
+1. Call thefunction `initResetPlugin` to init the mixin at any point of the lifecycle of your component (Preferably on created or mounted):
 ```javascript
 export default {
   created() {
@@ -40,7 +40,7 @@ export default {
   }
 }
 ```
-2. When you want to reset some, call this function:
+2. When you want to reset some, call the function `resetData`:
 ```javascript
 export default {
   methods: {
@@ -51,6 +51,8 @@ export default {
 }
 ```
 - keys: Arrays of strings containing the names of the data key you want to reset. If this value is null, will reset the whole data.
+
+** NOTE: ** Do not use the key `originalData` as part of your data.
 
 ### License
 MIT
