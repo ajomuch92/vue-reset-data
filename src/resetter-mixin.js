@@ -38,13 +38,11 @@ const Resetter = {
       } else if(Array.isArray(keys)) {
         for(const k of keys) {
           if(typeof k == 'string' && originalKeys.includes(k)) {
-            // this.$data[k] = this.$originalData[k];
-            this.$set(this.$data, k, this.$originalData[k]);
+            this.$data[k] = this.$originalData[k];
           }
         }
       } else if(typeof keys === 'string' && originalKeys.includes(keys)) {
-        // this.$data[keys] = this.$originalData[keys];
-        this.$set(this.$data, keys, this.$originalData[keys]);
+        this.$data[keys] = this.$originalData[keys];
       } else {
         return;
       }
