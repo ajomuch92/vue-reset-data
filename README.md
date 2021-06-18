@@ -63,7 +63,7 @@ export default {
 }
 ```
 
-** NOTE: ** Do not use the key `$originalData` as part of your data.
+**NOTE:** Do not use the key `$originalData` as part of your data.
 
 ### License
 MIT
