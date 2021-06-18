@@ -50,12 +50,21 @@ export default {
   }
 }
 ```
-- keys: Arrays of strings containing the names of the data key you want to reset. If this value is null, will reset the whole data.
+- keys: Arrays of strings containing the names of the data key you want to reset or a simple string with the name of the key to reset. If this value is null, will reset the whole data.
 
-** NOTE: ** Do not use the key `originalData` as part of your data.
+This mixin include a method named $clone to clone in deep objects. Use as follow:
+```javascript
+export default {
+  methods: {
+    yourMethod() {
+      const clonedObject = this.$clone(objectToClone);
+    }
+  }
+}
+```
+
+** NOTE: ** Do not use the key `$originalData` as part of your data.
 
 ### License
 MIT
 
-### TODO
-- Test it
