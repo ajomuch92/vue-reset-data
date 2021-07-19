@@ -35,17 +35,20 @@ const Resetter = {
     resetData(keys) {
       const originalKeys = Object.keys(this.$originalData);
       if(keys == null) {
+        const clone = this.$clone(this.$originalData);
         for(const k of originalKeys) {
-          this.$data[k] = this.$originalData[k];
+          this.$data[k] = clone[k];
         }
       } else if(Array.isArray(keys)) {
+        const clone = this.$clone(this.$originalData);
         for(const k of keys) {
           if(typeof k == 'string' && originalKeys.includes(k)) {
-            this.$data[k] = this.$originalData[k];
+            this.$data[k] = clone[k];
           }
         }
       } else if(typeof keys === 'string' && originalKeys.includes(keys)) {
-        this.$data[keys] = this.$originalData[keys];
+        const clone = this.$clone(this.$originalData);
+        this.$data[keys] = clone[keys];
       } else {
         return;
       }
