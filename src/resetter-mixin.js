@@ -5,7 +5,6 @@ const Resetter = {
   methods: {
     initResetPlugin() {
       this.$originalData = this.$clone(this.$data);
-      delete this.$originalData.originalData;
     },
     $clone(object) {
       const cloning = {};
@@ -18,7 +17,11 @@ const Resetter = {
         } else if(obj === undefined) {
           cloning[prop] = undefined;
         } else if(Array.isArray(obj)) {
-          cloning[prop] = [...obj];
+          const arr = [];
+          for(const o of obj) {
+            arr.push(this.$clone(o))
+          }
+          cloning[prop] = arr;
         } else if(typeof obj === 'object') {
           cloning[prop] = this.$clone(obj);
         } else if (obj instanceof Date) {
