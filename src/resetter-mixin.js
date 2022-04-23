@@ -7,30 +7,34 @@ const Resetter = {
       this.$originalData = this.$clone(this.$data);
     },
     $clone(object) {
-      const cloning = {};
-      Object.keys(object).map(prop => {
-        if(prop === '$originalData')
-          return;
-        const obj = object[prop];
-        if(obj === null) {
-          cloning[prop] = null;
-        } else if(obj === undefined) {
-          cloning[prop] = undefined;
-        } else if(Array.isArray(obj)) {
-          const arr = [];
-          for(const o of obj) {
-            arr.push(this.$clone(o))
-          }
-          cloning[prop] = arr;
-        } else if(typeof obj === 'object') {
-          cloning[prop] = this.$clone(obj);
-        } else if (obj instanceof Date) {
-          cloning[prop] = new Date(obj.getTime());
-        } else if (typeof obj === 'function') {
-          cloning[prop] = obj.bind();
-        } else cloning[prop] = obj;
-      });
-      return cloning;
+      if (typeof object == 'object' && object.constructor == Object) {
+        const cloning = {};
+        Object.keys(object).map(prop => {
+          if(prop === '$originalData')
+            return;
+          const obj = object[prop];
+          if(obj === null) {
+            cloning[prop] = null;
+          } else if(obj === undefined) {
+            cloning[prop] = undefined;
+          } else if(Array.isArray(obj)) {
+            const arr = [];
+            for(const o of obj) {
+              arr.push(this.$clone(o))
+            }
+            cloning[prop] = arr;
+          } else if(typeof obj === 'object') {
+            cloning[prop] = this.$clone(obj);
+          } else if (obj instanceof Date) {
+            cloning[prop] = new Date(obj.getTime());
+          } else if (typeof obj === 'function') {
+            cloning[prop] = obj.bind();
+          } else cloning[prop] = obj;
+        });
+        return cloning;
+      } else {
+        return object;
+      }
     },
     resetData(keys) {
       const originalKeys = Object.keys(this.$originalData);
